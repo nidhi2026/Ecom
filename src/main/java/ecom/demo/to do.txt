@@ -1,0 +1,4 @@
+SERVICE & CONTROLLER
+    Auths
+
+FRONTEND
