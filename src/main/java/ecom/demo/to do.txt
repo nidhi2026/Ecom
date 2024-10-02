@@ -1,4 +1,0 @@
-SERVICE & CONTROLLER
-    Auths
-
-FRONTEND
