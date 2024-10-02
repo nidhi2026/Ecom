@@ -1,8 +1,4 @@
-MODELS
-    add constructir
-    models from relational schema
-
-REPO
-    CRUD operations
-
 SERVICE & CONTROLLER
+    Auths
+
+FRONTEND

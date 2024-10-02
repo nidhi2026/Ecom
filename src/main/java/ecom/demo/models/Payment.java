@@ -16,14 +16,17 @@ public class Payment {
 
     private LocalDateTime paymentTime;
 
-    public enum paymentMode {
+    public enum PaymentMode {
         CASH_ON_DELIVERY, UPI, NET_BANKING
     }
+
+    public PaymentMode paymentMode;
 
     public Payment(UUID paymentID, UUID orderID, LocalDateTime paymentTime) {
         this.paymentID = paymentID;
         this.orderID = orderID;
         this.paymentTime = paymentTime;
+        this.paymentMode = PaymentMode.CASH_ON_DELIVERY;
     }
 
     

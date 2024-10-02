@@ -22,6 +22,8 @@ public class User {
 
     private String email;
 
+    private String password;
+
     private String gender;
 
     private String phone;
@@ -29,9 +31,9 @@ public class User {
     public User(UUID userID, String fName, String mName, String lName, LocalDate dob, String email, String gender,
             String phone) {
         this.userID = userID;
-        FName = fName;
-        MName = mName;
-        LName = lName;
+        this.FName = fName;
+        this.MName = mName;
+        this.LName = lName;
         this.dob = dob;
         this.email = email;
         this.gender = gender;

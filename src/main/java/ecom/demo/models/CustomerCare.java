@@ -18,13 +18,17 @@ public class CustomerCare {
         HIGH, MEDIUM, LOW
     }
 
-    private String issue;
+    private Priority priority;
+
+    private String issue; 
 
     private String description;
 
     public enum Status {
         SUBMITTED, IN_PROGRESS, RESOLVED
     }
+
+    public Status status;
 
     private LocalDateTime filedTime;
 
@@ -34,6 +38,8 @@ public class CustomerCare {
         this.issue = issue;
         this.description = description;
         this.filedTime = filedTime;
+        this.priority = Priority.MEDIUM;
+        this.status = Status.SUBMITTED;
     }
 
     
