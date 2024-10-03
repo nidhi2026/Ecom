@@ -1,7 +1,5 @@
 package ecom.demo.models;
 
-import java.util.UUID;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,15 +7,8 @@ import lombok.Setter;
 @Setter
 public class CouponUsability {
     
-    private UUID couponID;
+    private String couponID;
 
-    private UUID productID;
-
-    public CouponUsability(UUID couponID, UUID productID) {
-        this.couponID = couponID;
-        this.productID = productID;
-    }
-
-    
+    private String productID;
 
 }

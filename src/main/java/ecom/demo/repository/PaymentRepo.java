@@ -1,7 +1,6 @@
 package ecom.demo.repository;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -30,7 +29,7 @@ public class PaymentRepo {
         }
     }
 
-    public Payment getPaymentById(UUID paymentID) {
+    public Payment getPaymentById(String paymentID) {
         String sql = "SELECT * FROM Payments WHERE paymentID = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Payment.class), paymentID.toString());
@@ -60,7 +59,7 @@ public class PaymentRepo {
         }
     }
 
-    public int deletePayment(UUID paymentID) {
+    public int deletePayment(String paymentID) {
         String sql = "DELETE FROM Payments WHERE paymentID = ?";
         try {
             return jdbcTemplate.update(sql, paymentID.toString());

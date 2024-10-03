@@ -1,20 +1,20 @@
 package ecom.demo.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class WishList {
+public class Orders {
     
-    private String wishlistID;
+    private String orderID;
 
     private String productID;
 
-    private LocalDateTime addTime;
-
     private String userID;
+
+    private LocalDate orderDate;    
 
 }

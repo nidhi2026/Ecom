@@ -1,7 +1,5 @@
 package ecom.demo.models;
 
-import java.util.UUID;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,15 +7,8 @@ import lombok.Setter;
 @Setter
 public class SuppliesList {
     
-    private UUID supplierID;
+    private String supplierID;
 
-    private UUID productID;
-
-    public SuppliesList(UUID supplierID, UUID productID) {
-        this.supplierID = supplierID;
-        this.productID = productID;
-    }
-
-    
+    private String productID;
 
 }

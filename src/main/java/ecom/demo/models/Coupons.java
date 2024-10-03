@@ -1,7 +1,6 @@
 package ecom.demo.models;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class Coupons {
 
-    private UUID couponID;
+    private String couponID;
 
     private Integer usageLimit;
 
@@ -21,17 +20,5 @@ public class Coupons {
     private LocalDate validTo;
 
     private Integer discount;
-
-    public Coupons(UUID couponID, Integer usageLimit, String couponCode, LocalDate validFrom, LocalDate validTo,
-            Integer discount) {
-        this.couponID = couponID;
-        this.usageLimit = usageLimit;
-        this.couponCode = couponCode;
-        this.validFrom = validFrom;
-        this.validTo = validTo;
-        this.discount = discount;
-    }
-
-    
     
 }

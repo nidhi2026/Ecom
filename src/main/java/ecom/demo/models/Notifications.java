@@ -9,18 +9,10 @@ import lombok.Setter;
 @Setter
 public class Notifications {
 
-    private UUID notificationsID;
+    private String notificationsID;
 
-    private UUID userID;
+    private String userID;
 
     private String message;
-
-    public Notifications(UUID notificationsID, UUID userID, String message) {
-        this.notificationsID = notificationsID;
-        this.userID = userID;
-        this.message = message;
-    }
-
-    
     
 }

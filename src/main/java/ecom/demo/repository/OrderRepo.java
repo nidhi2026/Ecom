@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import ecom.demo.models.Order;
+import ecom.demo.models.Orders;
 
 @Repository
 public class OrderRepo {
@@ -20,7 +20,7 @@ public class OrderRepo {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int addOrder(Order order) {
+    public int addOrder(Orders order) {
         String sql = "INSERT INTO Orders (orderID, productID, userID, orderDate) VALUES (?, ?, ?, ?)";
         try {
             return jdbcTemplate.update(sql, order.getOrderID().toString(), order.getProductID().toString(), order.getUserID().toString(), order.getOrderDate());
@@ -30,27 +30,27 @@ public class OrderRepo {
         }
     }
 
-    public Order getOrderById(UUID orderID) {
+    public Orders getOrderById(UUID orderID) {
         String sql = "SELECT * FROM Orders WHERE orderID = ?";
         try {
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Order.class), orderID.toString());
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Orders.class), orderID.toString());
         } catch (Exception e) {
             System.out.println("Error fetching order by ID: " + e.getMessage());
             return null;
         }
     }
 
-    public List<Order> getAllOrders() {
+    public List<Orders> getAllOrders() {
         String sql = "SELECT * FROM Orders";
         try {
-            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Order.class));
+            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Orders.class));
         } catch (Exception e) {
             System.out.println("Error fetching all orders: " + e.getMessage());
             return null;
         }
     }
 
-    public int updateOrder(Order order) {
+    public int updateOrder(Orders order) {
         String sql = "UPDATE Orders SET productID = ?, userID = ?, orderDate = ? WHERE orderID = ?";
         try {
             return jdbcTemplate.update(sql, order.getProductID().toString(), order.getUserID().toString(), order.getOrderDate(), order.getOrderID().toString());

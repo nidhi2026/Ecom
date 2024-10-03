@@ -1,7 +1,5 @@
 package ecom.demo.models;
 
-import java.util.UUID;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class Product {
     
-    private UUID productID;
+    private String productID;
 
     private String productName;
 
@@ -25,21 +23,7 @@ public class Product {
 
     private Integer stock;
 
-    private UUID categoryID;
-
-    public Product(UUID productID, String productName, String description, String country, Float rating,
-            Integer discount, Float price, Integer stock, UUID categoryID) {
-        this.productID = productID;
-        this.productName = productName;
-        this.description = description;
-        this.country = country;
-        this.rating = rating;
-        this.discount = discount;
-        this.price = price;
-        this.stock = stock;
-        this.categoryID = categoryID;
-    }
-
+    private String categoryID;
     
 
 }

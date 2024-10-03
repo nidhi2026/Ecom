@@ -10,9 +10,9 @@ import lombok.Setter;
 @Setter
 public class CustomerCare {
     
-    private UUID customerCareID;
+    private String customerCareID;
 
-    private UUID userID;
+    private String userID;
 
     public enum Priority {
         HIGH, MEDIUM, LOW
@@ -31,17 +31,5 @@ public class CustomerCare {
     public Status status;
 
     private LocalDateTime filedTime;
-
-    public CustomerCare(UUID customerCareID, UUID userID, String issue, String description, LocalDateTime filedTime) {
-        this.customerCareID = customerCareID;
-        this.userID = userID;
-        this.issue = issue;
-        this.description = description;
-        this.filedTime = filedTime;
-        this.priority = Priority.MEDIUM;
-        this.status = Status.SUBMITTED;
-    }
-
-    
 
 }

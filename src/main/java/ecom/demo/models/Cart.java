@@ -10,21 +10,13 @@ import lombok.Setter;
 @Setter
 public class Cart {
 
-    private UUID cartID;
+    private String cartID;
 
-    private UUID productID;
+    private String productID;
 
     private LocalDate addTime;
 
-    private UUID userID;
+    private String userID;
 
     private Integer quantity;
-
-    public Cart(UUID cartID, UUID productID, LocalDate addTime, UUID userID, Integer quantity) {
-        this.cartID = cartID;
-        this.productID = productID;
-        this.addTime = addTime;
-        this.userID = userID;
-        this.quantity = quantity;
-    }
 }

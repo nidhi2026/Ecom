@@ -1,7 +1,5 @@
 package ecom.demo.models;
 
-import java.util.UUID;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class Supplier {
     
-    private UUID supplierID;
+    private String supplierID;
 
     private String FName;
 
@@ -21,19 +19,7 @@ public class Supplier {
 
     private String email;
 
-    private UUID addressID;
+    private String addressID;
 
-    public Supplier(UUID supplierID, String fName, String mName, String lName, String phone, String email,
-            UUID addressID) {
-        this.supplierID = supplierID;
-        FName = fName;
-        MName = mName;
-        LName = lName;
-        this.phone = phone;
-        this.email = email;
-        this.addressID = addressID;
-    }
-
-    
 
 }

@@ -1,7 +1,5 @@
 package ecom.demo.models;
 
-import java.util.UUID;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,15 +7,8 @@ import lombok.Setter;
 @Setter
 public class ProductImage {
     
-    private UUID productID;
+    private String productID;
 
     private String imageLink;
-
-    public ProductImage(UUID productID, String imageLink) {
-        this.productID = productID;
-        this.imageLink = imageLink;
-    }
-
-    
 
 }

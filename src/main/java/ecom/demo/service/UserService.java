@@ -3,7 +3,6 @@ package ecom.demo.service;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ecom.demo.models.User;
@@ -12,7 +11,7 @@ import ecom.demo.repository.UserRepo;
 @Service
 public class UserService {
 
-    private BCryptPasswordEncoder passwordEncoder;
+    // private BCryptPasswordEncoder passwordEncoder;
 
     private final UserRepo userRepository;
 
@@ -21,15 +20,16 @@ public class UserService {
     }
 
     public int addUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.addUser(user);
     }
 
-    public User getUserById(UUID userID) {
+    public User getUserById(String userID) {
         return userRepository.getUserByID(userID);
     }
 
     public List<User> getAllUsers() {
+        System.out.println(userRepository.getAllUsers());
         return userRepository.getAllUsers();
     }
 
@@ -37,7 +37,7 @@ public class UserService {
         return userRepository.updateUser(user);
     }
 
-    public int deleteUser(UUID userID) {
+    public int deleteUser(String userID) {
         return userRepository.deleteUser(userID);
     }
 

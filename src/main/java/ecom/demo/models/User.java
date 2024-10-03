@@ -1,7 +1,6 @@
 package ecom.demo.models;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class User {
 
-    private UUID userID;
+    private String userID;
 
     private String FName;
 
@@ -27,19 +26,5 @@ public class User {
     private String gender;
 
     private String phone;
-
-    public User(UUID userID, String fName, String mName, String lName, LocalDate dob, String email, String gender,
-            String phone) {
-        this.userID = userID;
-        this.FName = fName;
-        this.MName = mName;
-        this.LName = lName;
-        this.dob = dob;
-        this.email = email;
-        this.gender = gender;
-        this.phone = phone;
-    }
-
-    
 
 }
