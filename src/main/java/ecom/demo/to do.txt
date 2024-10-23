@@ -1,0 +1,26 @@
+SERVICE & CONTROLLER
+    Auths
+
+FRONTEND
+
+{
+        "customerCareID": "ccid2",
+        "userID": "ddeeewfejf",
+        "priority": "LOW",
+        "issue": "Payment Issue",
+        "description": "Payment in progress",
+        "status": "IN_PROGRESS",
+        "filedTime": "2024-10-03T08:33:31"
+    }
+
+{
+    "userID": "Khsuhi",
+    "dob": "1991-05-15",
+    "email": "abcdefg@gmail.com",
+    "password": "passwordispasswrod",
+    "gender": "female",
+    "phone": "137396346",
+    "fname": "alice",
+    "lname": "js",
+    "mname": "mo"
+  }
