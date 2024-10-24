@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Details</title>
+</head>
+<body>
+    <h1 th:text="${product.productName}">Product Name</h1>
+    <div>
+        <div th:each="image : ${images}">
+            <img th:src="@{${image.imageLink}}" alt="Product Image" />
+        </div>
+        <p th:text="${product.description}">Description</p>
+        <p>Price: <span th:text="${product.price}">0.00</span></p>
+        <p>Discount: <span th:text="${product.discount}">0</span>%</p>
+        <p>Discounted Price: 
+            <span th:text="${product.price * (1 - product.discount / 100.0)}">0.00</span>
+        </p>
+        <form action="/wishlist/add" method="post">
+            <!-- <p th:text="${user != null ? user.userID : 'Guest'}"></p> -->
+
+            <input type="hidden" name="userID" th:value="${user.userID}"/>
+            <input type="hidden" name="productID" th:value="${product.productID}"/>
+            <button type="submit">Add to Wishlist</button>
+        </form>
+        <button>Add to Cart</button>
+        <button>Order Now</button>
+    </div>
+</body>
+</html>
