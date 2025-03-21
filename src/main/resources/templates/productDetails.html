@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Details</title>
+</head>
+<style>
+       /* Styling for image container */
+       .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-start; /* Aligns images to the left */
+        }
+
+    /* Styling for individual product image */
+    .product-image {
+        width: 150px;       /* Adjust to preferred size */
+        height: 150px;      /* Ensures consistent height */
+        object-fit: cover;  /* Ensures images fit without distortion */
+        border-radius: 8px; /* Adds rounded corners */
+        border: 1px solid #ddd; /* Optional: light border for better visibility */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds subtle shadow */
+    }
+</style>
+<body>
+    <h1 th:text="${product.productName}">Product Name</h1>
+    <div>
+        <div class="image-container">
+            <!-- Display each image if images list is not empty -->
+            <div th:if="${images != null and !images.isEmpty()}" th:each="image : ${images}">
+                <img th:src="@{${image.imageLink}}" alt="Product Image" class="product-image" />
+            </div>
+            
+            <!-- Default image if images list is empty -->
+            <div th:if="${images == null or images.isEmpty()}">
+                <img src="https://png.pngtree.com/background/20211217/original/pngtree-golden-green-mandala-art-background-with-border-invitation-card-wedding-islamic-picture-image_1597514.jpg" 
+                     alt="Default Product Image" class="product-image" />
+            </div>
+        </div>
+        <p th:text="${product.description}">Description</p>
+        <p>Price: <span th:text="${product.price}">0.00</span></p>
+        <p>Discount: <span th:text="${product.discount}">0</span>%</p>
+        <p>Discounted Price: 
+            <span th:text="${#numbers.formatDecimal(product.price * (1 - product.discount / 100.0), 2, 2)}" class="discounted-price">0.00</span>
+        </p>
+        <!-- wishlist form -->
+        <form th:action="${isWishlisted ? '/wishlist/remove' : '/wishlist/add'}" method="post">
+            <input type="hidden" name="productID" th:value="${product.productID}"/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit" th:text="${isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}"></button>
+        </form>
+
+        
+        <!-- Add to Cart Form -->
+        <form action="/cart/add" method="post">
+            <input type="hidden" name="productID" th:value="${product.productID}"/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        
+            <!-- Quantity input -->
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1"/>
+        
+            <button type="submit">Add to Cart</button>
+        </form>
+
+
+        <hr />
+
+        <!-- Reviews Section -->
+        <h2>Reviews</h2>
+        <div th:if="${#lists.isEmpty(reviewUserMap)}">
+            <p>No reviews yet.</p>
+        </div>
+        <div th:each="entry : ${reviewUserMap}">
+            <h3 th:text="${entry.value}">Reviewer Name</h3>
+            <p>Rating: <span th:text="${entry.key.rating}">0</span>/5</p>
+            <p th:text="${entry.key.comment}">Review Comment</p>
+            <p th:text="${entry.key.reviewTime}">Review Date</p>
+            <hr />
+        </div>
+        
+        <!-- <p>CSRF Token: <span th:text="${_csrf.token}"></span></p> -->
+    </div>
+</body>
+</html>

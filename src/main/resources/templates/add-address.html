@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Address</title>
+</head>
+<body>
+    <h2>Add Address</h2>
+    <form th:action="@{/address/add/{personID}(personID=${address.personID})}" method="post">
+        <!-- Removed Person ID field -->
+
+        <label for="streetName">Street Name:</label>
+        <input type="text" id="streetName" name="streetName" required><br><br>
+
+        <label for="cityName">City Name:</label>
+        <input type="text" id="cityName" name="cityName" required><br><br>
+
+        <label for="districtName">District Name:</label>
+        <input type="text" id="districtName" name="districtName" required><br><br>
+
+        <label for="pincode">Pincode:</label>
+        <input type="text" id="pincode" name="pincode" required><br><br>
+
+        <label for="countryName">Country Name:</label>
+        <input type="text" id="countryName" name="countryName" required><br><br>
+
+        <button type="submit">Add Address</button>
+    </form>
+    
+    <!-- Success and error messages -->
+    <div>
+        <p th:text="${successMessage}" style="color:green;"></p>
+        <p th:text="${errorMessage}" style="color:red;"></p>
+    </div>
+</body>
+</html>

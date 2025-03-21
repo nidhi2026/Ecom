@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Addresses</title>
+</head>
+<body>
+    <h2>All Addresses</h2>
+
+    <form th:action="@{/address/removeFromAddress/{personID}(personID=${personID})}" method="post">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Street Name</th>
+                    <th>City Name</th>
+                    <th>District Name</th>
+                    <th>Pincode</th>
+                    <th>Country Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="address : ${addresses}">
+                    <!-- Radio button for selecting address -->
+                    <td>
+                        <input type="radio" name="selectedAddress" th:value="${address.addressID}" 
+                               th:id="${address.addressID}" 
+                               onclick="document.getElementById('selectedAddressID').value=this.value" />
+                    </td>
+                    <td th:text="${address.streetName}"></td>
+                    <td th:text="${address.cityName}"></td>
+                    <td th:text="${address.districtName}"></td>
+                    <td th:text="${address.pincode}"></td>
+                    <td th:text="${address.countryName}"></td>
+                    <td>
+                        <!-- Edit link for each address -->
+                        <a th:href="@{/address/edit/{addressID}/{personID}(addressID=${address.addressID}, personID=${personID})}">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <!-- Hidden input to pass the selected address ID -->
+        <input type="hidden" id="selectedAddressID" name="addressID" />
+    
+        <button type="submit">Remove Address</button>
+    </form>
+
+    <br>
+    <!-- Add Address link includes personID -->
+    <a th:href="@{/address/add/{personID}(personID=${personID})}">Add Address</a>
+</body>
+</html>

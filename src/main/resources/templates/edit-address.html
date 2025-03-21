@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Address</title>
+</head>
+<body>
+    <h2>Edit Address</h2>
+
+    <form th:action="@{/address/edit/{addressID}/{personID}(addressID=${address.addressID}, personID=${personID})}" method="post">
+        
+        <label for="streetName">Street Name:</label>
+        <input type="text" id="streetName" name="streetName" th:value="${address.streetName}" required />
+
+        <label for="cityName">City Name:</label>
+        <input type="text" id="cityName" name="cityName" th:value="${address.cityName}" required />
+
+        <label for="districtName">District Name:</label>
+        <input type="text" id="districtName" name="districtName" th:value="${address.districtName}" required />
+
+        <label for="pincode">Pincode:</label>
+        <input type="text" id="pincode" name="pincode" th:value="${address.pincode}" required />
+
+        <label for="countryName">Country Name:</label>
+        <input type="text" id="countryName" name="countryName" th:value="${address.countryName}" required />
+
+        <button type="submit">Update Address</button>
+    </form>
+
+    <br>
+    <!-- Back link to the all addresses page, including personID -->
+    <a th:href="@{/address/all/{personID}(personID=${personID})}">Back to All Addresses</a>
+</body>
+</html>

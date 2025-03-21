@@ -1,0 +1,92 @@
+<!-- fragments.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Base Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+              rel="stylesheet" 
+              crossorigin="anonymous">
+        <style>
+            /* Set font to Arial */
+            body {
+                font-family: Arial, sans-serif;
+            }
+            
+            /* Custom styles for dropdown items */
+            .dropdown-menu .dropdown-item {
+                font-size: 13px; /* Adjust font size */
+                padding: 6px 20px; /* Adjust padding */
+            }
+    
+            /* Reduce space between Name and Phone */
+            .user-info p {
+                margin-bottom: 4px; /* Reduce bottom margin */
+            }
+        </style>
+    </head>
+<body>
+    <aside id="base" class="js-sidebar" th:fragment="authenticatedSidebar">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/base/}">E-commerce Platform</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-1 mb-lg-0"></ul>
+
+                    <div class="d-flex">
+                        <a class="nav-link" th:href="@{/Products}">Products</a>
+
+                        <!-- Profile Dropdown -->
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>Profile</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                <!-- If logged in, show user details and options -->
+                                <li class="user-info" th:if="${user != null}">
+                                    <p class="dropdown-item fw-bold mb-1"><span th:text="${user.FName + ' ' + user.LName}">Full Name</span></p>
+                                    <p class="dropdown-item"><span th:text="${user.phone}">Phone Number</span></p>
+                                    <hr class="dropdown-divider">
+                                </li>
+
+                                <!-- If not logged in, show welcome message and login/signup link -->
+                                <li th:if="${user == null}">
+                                    <p class="dropdown-item text-center fw-bold">Welcome</p>
+                                    <p class="dropdown-item text-center">To access your account and manage orders</p>
+                                    <a class="dropdown-item text-center fw-bold" th:href="@{/users/login}">Login/Signup</a>
+                                    <hr class="dropdown-divider">
+                                </li>
+
+                                <!-- Common dropdown options -->
+                                <a class="dropdown-item" th:href="@{/wishlist/{userID}(userID = ${user.userID})}">Wishlist</a>
+                                <a class="dropdown-item" th:href="@{/cart/{userID}(userID = ${user.userID})}">Cart</a>
+                                <a class="dropdown-item" th:href="@{/order/{userID}(userID = ${user.userID})}">Your Orders</a>
+                                <a class="dropdown-item" th:href="@{/coupons}">Coupons</a>
+
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" th:href="@{/contact}">Contact Us</a>
+                                <a class="dropdown-item" th:href="@{/addresses}">Saved Addresses</a>
+
+                                <hr class="dropdown-divider">
+                                <!-- Edit Profile and Logout Links if logged in -->
+                                <li th:if="${user != null}">
+                                    <a class="dropdown-item" th:href="@{/users/edit-profile/{userID}(userID = ${user.userID})}">Edit Profile</a>
+                                    <a class="dropdown-item" th:href="@{/users/logout}">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <a class="nav-link" th:href="@{/notifications/all}">Notifications</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </aside>
+</body>
+</html>

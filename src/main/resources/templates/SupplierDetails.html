@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Supplier Details</title>
+</head>
+<body>
+    <h1>Supplier Details</h1>
+
+    <div>
+        <p><strong>Supplier ID:</strong> <span th:text="${supplier.supplierID}">Supplier ID</span></p>
+        <p><strong>First Name:</strong> <span th:text="${supplier.FName}">First Name</span></p>
+        <p><strong>Middle Name:</strong> <span th:text="${supplier.MName}">Middle Name</span></p>
+        <p><strong>Last Name:</strong> <span th:text="${supplier.LName}">Last Name</span></p>
+        <p><strong>Phone:</strong> <span th:text="${supplier.phone}">Phone</span></p>
+        <p><strong>Email:</strong> <span th:text="${supplier.email}">Email</span></p>
+        <p><strong>Address ID:</strong> <span th:text="${supplier.addressID}">Address ID</span></p>
+    </div>
+
+    <h2>Products Added by Supplier</h2>
+    <div th:if="${products != null && !products.isEmpty()}">
+        <ul>
+            <li th:each="product : ${products}">
+                <p>
+                    <strong>Product ID:</strong> <span th:text="${product.productID}"></span><br>
+                    <strong>Name:</strong> <span th:text="${product.productName}"></span><br>
+                    <strong>Description:</strong> <span th:text="${product.description}"></span><br>
+                    <strong>Price:</strong> <span th:text="${product.price}"></span><br>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div th:if="${products == null || products.isEmpty()}">
+        <p>No products found for this supplier.</p>
+    </div>
+
+    <div>
+        <a th:href="@{/supplier/{supplierId}/addProduct(supplierId=${supplier.supplierID})}">Add Product</a>
+    </div>
+
+    <a href="/supplier/all">Back to Supplier List</a>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wishlist</title>
+</head>
+<body>
+    <h2>Your Wishlist</h2>
+    <div th:if="${#lists.isEmpty(wishlistProducts)}">
+        <p>Your wishlist is empty.</p>
+    </div>
+    <div th:each="product : ${wishlistProducts}">
+        <div>
+            <h3 th:text="${product.productName}">Product Name</h3>
+            <p th:text="'Price: $' + ${product.price}">Price</p>
+            <p th:text="'Discount: ' + ${product.discount} + '%'">Discount</p>
+            <div>
+                <!-- <img th:src="@{${product.images[0].imageUrl}}" alt="Product Image" th:if="${#lists.isNotEmpty(product.images)}" /> -->
+                
+                <div th:if="${product.images != null and !product.images.isEmpty()}" th:each="image : ${product.images}">
+                    <img th:src="@{${product.image.imageLink}}" alt="Product Image" class="product-image" style="width:50px; height:50px;"/>
+                </div>
+                
+                <!-- Default image if images list is empty -->
+                <div th:if="${product.images == null or product.images.isEmpty()}">
+                    <img src="https://png.pngtree.com/background/20211217/original/pngtree-golden-green-mandala-art-background-with-border-invitation-card-wedding-islamic-picture-image_1597514.jpg" 
+                         alt="Default Product Image" class="product-image" style="width:50px; height:50px;"/>
+                </div>
+
+            </div>
+            <div th:if="${product.stock > 0}">
+                <form action="/cart/add" method="post">
+                    <input type="hidden" name="productID" th:value="${product.productID}"/>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div th:if="${product.stock == 0}">
+                <p>Out of Stock</p>
+            </div>
+            <!-- wishlist form -->
+            <form action="/wishlist/remove" method="post">
+
+                <input type="hidden" name="productID" th:value="${product.productID}"/>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <button type="submit">Remove from Wishlist</button>
+            </form>
+            
+        </div>
+    </div>
+</body>
+</html>

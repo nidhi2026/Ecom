@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Products</title>
+    <link rel="stylesheet" href="path/to/your/css/styles.css" /> <!-- Link to your CSS file -->
+    <style>
+        /* Grid layout for products */
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .product-item img {
+            width: 100px; /* Set the image width */
+            height: auto;
+            margin-bottom: 10px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-item h2 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        /* Style for discounted price */
+        .discounted-price {
+            font-weight: bold;
+            color: #e63946; /* Highlight color for the discounted price */
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .product-list {
+                grid-template-columns: 1fr 1fr; /* Two columns on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-list {
+                grid-template-columns: 1fr; /* One column on very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Products</h1>
+    <div class="product-list">
+        <div th:each="product : ${products}" class="product-item">
+            <img th:if="${product.images != null and !product.images.isEmpty()}"
+                 th:src="@{${product.images[0].imageLink}}"
+                 alt="Product Image" />
+            <img th:if="${product.images == null or product.images.isEmpty()}"
+                 src="https://png.pngtree.com/background/20211217/original/pngtree-golden-green-mandala-art-background-with-border-invitation-card-wedding-islamic-picture-image_1597514.jpg"
+                 alt="Default Product Image" />
+
+            <h2 th:text="${product.productName}">Product Name</h2>
+            <p>Price: <span th:text="${product.price}">0.00</span></p>
+            <p>Discount: <span th:text="${product.discount}">0</span>%</p>
+            <p>Discounted Price: 
+                <span th:text="${#numbers.formatDecimal(product.price * (1 - product.discount / 100.0), 2, 2)}" class="discounted-price">0.00</span>
+            </p>
+            <a th:href="@{/products/{id}(id=${product.productID})}">View Details</a>
+        </div>
+    </div>
+</body>
+</html>

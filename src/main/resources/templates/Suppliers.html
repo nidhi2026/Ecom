@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Suppliers</title>
+</head>
+<body>
+    <h1>Suppliers</h1>
+    <ul>
+        <li th:each="supplier : ${suppliers}">
+            <span th:text="${supplier.FName}">Supplier Name</span>
+            <a th:href="@{/supplier/{id}(id=${supplier.supplierID})}">View Details</a>
+        </li>
+    </ul>
+</body>
+</html>

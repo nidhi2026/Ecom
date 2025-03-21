@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Select Address</title>
+</head>
+<body>
+    <h1>Select Delivery Address</h1>
+
+    <form th:action="@{/order/confirm}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- CSRF Token -->
+
+        <!-- List of Addresses with Radio Buttons -->
+        <div th:each="address : ${addresses}">
+            <input type="radio" name="selectedAddressID" th:value="${address.addressID}" th:id="${'address-' + address.addressID}"/>
+            <label th:for="${'address-' + address.addressID}">
+                <span th:text="${address.streetName + ', ' + address.cityName + ', ' + address.pincode}"></span>
+            </label>
+            <!-- <button type="button" th:onclick="'/address/delete/' + ${address.addressID}" onclick="deleteAddress(this)">Delete</button> -->
+            <br/>
+        </div>
+
+        <!-- Button to Add a New Address -->
+        <div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <a th:href="@{/address/add/{userID}(userID=${user.userID})}">Add Address</a>
+        </div>
+
+        <!-- Submit Button to Confirm Address -->
+        <div>
+            <button type="submit">Continue with Selected Address</button>
+        </div>
+    </form>
+
+    <script>
+        
+    </script>
+</body>
+</html>

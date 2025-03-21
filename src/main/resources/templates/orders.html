@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Orders</title>
+</head>
+<body>
+
+<h1>User Orders</h1>
+
+<div th:each="orderSummary : ${orderSummaries}">
+    <h2>Order ID: <span th:text="${orderSummary.orderID}"></span></h2>
+    <h3>Total Cost: $<span th:text="${orderSummary.totalCost}"></span></h3>
+
+    <h4>Tracking ID: <span th:text="${orderSummary.tracking?.trackingID}"></span></h4>
+    <h4>Status: <span th:text="${orderSummary.tracking?.trackingStatus}"></span></h4>
+
+    <table border="1">
+        <tr>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Cancel</th>
+            <th>Action</th>
+            <th>Add Review</th>
+        </tr>
+        
+        <tr th:each="detail : ${orderSummary.orderDetails}">
+            <td>
+                <!-- <img th:src="@{${detail.product.images[0]?.imageLink}}" alt="Product Image" style="width:50px; height:50px;"> -->
+                <img th:if="${detail.product.images != null and !detail.product.images.isEmpty()}"
+                    th:src="@{${detail.product.images[0].imageLink}}"
+                    alt="Product Image" style="width:50px; height:50px;"/>
+                    <img th:if="${detail.product.images == null or detail.product.images.isEmpty()}"
+                            src="https://png.pngtree.com/background/20211217/original/pngtree-golden-green-mandala-art-background-with-border-invitation-card-wedding-islamic-picture-image_1597514.jpg"
+                            alt="Default Product Image" style="width:50px; height:50px;"/>
+            </td>
+            <td th:text="${detail.product.productName}">Product Name</td>
+            <td th:text="${detail.order.quantity}">Quantity</td>
+            <td th:text="${detail.cost}">Cost</td>
+            <td>
+                <div th:if="${detail.isRefunded}">
+                    Refunded
+                </div>
+                <div th:unless="${detail.isRefunded}">
+                    <form action="/order/removeFromOrder" method="post">
+                        <input type="hidden" name="orderID" th:value="${orderSummary.orderID}">
+                        <input type="hidden" name="productID" th:value="${detail.product.productID}">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- CSRF Token -->
+                        <button type="submit">Cancel Order</button>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div th:if="${detail.isRefunded}">
+                    Refunded
+                </div>
+                <div th:unless="${detail.isRefunded}">
+                    <form action="/order/refundProduct" method="get">
+                        <input type="hidden" name="orderID" th:value="${orderSummary.orderID}">
+                        <input type="hidden" name="productID" th:value="${detail.product.productID}">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- CSRF Token -->
+                        <button type="submit">Refund</button>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div> 
+                    <form th:action="@{/reviews/add/{productID}(productID = ${detail.product.productID})}" method="get">
+                        <button type="submit">Add review</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+</div>
+
+</body>
+</html>
